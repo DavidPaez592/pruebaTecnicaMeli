@@ -1,0 +1,82 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.pagination {
+  padding: $spacing-xl 0;
+  background: rgb(245, 245, 245); // Footer del paginador
+  width: 99.6vw; // Fondo cubre todo el ancho (como el navbar)
+  margin-left: calc(-50vw + 50%); // Extender fuera del contenedor
+  margin-right: calc(-50vw + 50%);
+  margin-top: 30px; // 30px de separación entre cards y footer
+
+  &__list {
+    @include flex-center;
+    gap: 4px;
+    flex-wrap: wrap;
+    max-width: $container-width; // 1200px contenido centrado
+    margin: 0 auto;
+    padding: 0 $spacing-lg; // 16px padding lateral
+  }
+
+  &__item {
+    display: flex;
+    
+    // Línea separadora de 2px entre números
+    &:not(:last-child)::after {
+      content: '';
+      width: 2px;
+      height: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      align-self: center;
+      margin-left: 4px;
+    }
+  }
+
+  &__button {
+    @include button-reset;
+    @include flex-center;
+    min-width: 28px;
+    height: 28px;
+    padding: 4px 8px;
+    font-size: 16px; // Font size: 16px
+    font-weight: 400; // Font Weight: 400
+    color: rgba(0, 0, 0, 0.9); // Color: rgba(0,0,0,0.9)
+    background: transparent; // Sin fondo por defecto
+    border: 2px solid transparent; // Sin borde por defecto
+    border-radius: $border-radius-sm;
+    transition: all $transition-fast;
+
+    &:hover:not(&--active) {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
+    }
+
+    // Solo la página activa tiene cuadro/borde
+    &--active {
+      border: 2px solid #3483FA; // Borde azul 2px
+      color: #3483FA;
+      background: #FFFFFF;
+    }
+
+    &--next {
+      margin-left: $spacing-md;
+      color: $color-text-secondary;
+      gap: $spacing-xs;
+      background: transparent;
+      font-weight: $font-weight-regular;
+      border: none;
+    }
+  }
+
+  &__ellipsis {
+    @include flex-center;
+    min-width: 28px;
+    height: 28px;
+    color: $color-text-tertiary;
+  }
+}
+

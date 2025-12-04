@@ -1,0 +1,162 @@
+@use '../../styles/variables' as *;
+
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  pointer-events: none;
+
+  @media (max-width: 480px) {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  font-family: $font-family;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+  animation: toast-enter 0.3s ease-out;
+  
+  &--exiting {
+    animation: toast-exit 0.3s ease-in forwards;
+  }
+
+  &--success {
+    background: #00a650;
+    
+    .toast__icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &--error {
+    background: #f23d4f;
+    
+    .toast__icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &--warning {
+    background: #fff159;
+    color: #333;
+    
+    .toast__icon {
+      background: rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+    
+    .toast__close {
+      color: #333;
+      
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  &--info {
+    background: $color-primary;
+    
+    .toast__icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &--loading {
+    background: #333;
+    
+    .toast__icon {
+      background: transparent;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+
+    &--spinning {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  &__message {
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

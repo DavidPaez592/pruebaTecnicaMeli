@@ -1,0 +1,164 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use 'sass:color';
+
+.search-box {
+  display: flex;
+  flex: 1;
+  max-width: $searchbar-width;
+  height: 40px;
+  background: $color-bg-secondary;
+  border-radius: $border-radius-sm;
+  overflow: visible; // Cambiado para permitir que el tooltip sea visible
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  &__input {
+    flex: 1;
+    border: none;
+    padding: 0 $spacing-lg;
+    font-size: $font-size-md;
+    font-weight: $font-weight-regular;
+    color: $color-text-primary;
+    background: $color-bg-secondary;
+    outline: none;
+    border-radius: $border-radius-sm 0 0 $border-radius-sm;
+
+    &::placeholder {
+      color: $color-text-secondary; // rgba(0,0,0,0.55) según especificaciones
+    }
+
+    @include tablet {
+      padding: 0 $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+
+  &__button-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__button {
+    @include button-reset;
+    @include flex-center;
+    width: 48px;
+    height: 40px;
+    background: $color-bg-secondary; // Mismo fondo blanco que la barra
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+    transition: background-color $transition-fast;
+    position: relative;
+
+    // Línea de separación centrada (no llega arriba ni abajo)
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 20px; // Línea centrada, no llega a los bordes
+      width: 1px;
+      background: #e0e0e0;
+    }
+
+    &:hover {
+      background: color.adjust(#FFFFFF, $lightness: -3%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-secondary;
+      outline-offset: -2px;
+    }
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+  }
+
+  // Tooltip de bienvenida
+  &__welcome {
+    position: absolute;
+    top: calc(100% + 12px); // Debajo del botón
+    right: 0;
+    z-index: 1000;
+    background: $color-secondary;
+    color: white;
+    padding: $spacing-lg $spacing-xl;
+    padding-right: 40px; // Espacio para el botón de cerrar
+    border-radius: $border-radius-md;
+    width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: welcomeFadeIn 0.3s ease;
+
+    @include tablet {
+      width: 280px;
+      right: -100px;
+    }
+
+    @include mobile {
+      width: 260px;
+      right: -120px;
+    }
+  }
+
+  &__welcome-arrow {
+    position: absolute;
+    top: -10px;
+    right: 14px; // Centrado con el botón de búsqueda
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $color-secondary;
+  }
+
+  &__welcome-close {
+    @include button-reset;
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color $transition-fast;
+    line-height: 1;
+
+    &:hover {
+      color: white;
+    }
+
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__welcome-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__welcome-message {
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    opacity: 0.95;
+    margin: 0;
+  }
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

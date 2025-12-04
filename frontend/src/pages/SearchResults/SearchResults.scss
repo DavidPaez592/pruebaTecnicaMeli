@@ -1,0 +1,101 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.search-results {
+  flex: 1;
+  background: $color-bg-primary;
+  padding-top: 30px; // 30px de padding superior según especificaciones
+  padding-bottom: 0; // Sin padding inferior, el paginador maneja su propio espacio
+
+  &__container {
+    @include container;
+    // Ancho de la card de resultado: 1200px (ya está en el mixin)
+  }
+
+  &__list {
+    @include card;
+    overflow: hidden;
+    width: 100%;
+    max-width: $container-width; // 1200px
+  }
+
+  &__loading {
+    @include flex-column;
+    gap: $spacing-md;
+    padding: $spacing-lg;
+  }
+
+  &__message,
+  &__error {
+    @include card;
+    padding: $spacing-3xl;
+    text-align: center;
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+
+  &__error {
+    color: $color-red;
+  }
+
+  &__no-results {
+    @include card;
+    @include flex-column;
+    align-items: center;
+    padding: 60px 40px;
+    text-align: center;
+    gap: 16px;
+
+    &-icon {
+      font-size: 64px;
+      margin-bottom: 8px;
+    }
+
+    &-title {
+      font-size: 24px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.9);
+      margin: 0;
+    }
+
+    &-query {
+      font-size: 18px;
+      font-weight: 600;
+      color: $color-primary;
+      margin: 0;
+    }
+
+    &-tips {
+      margin-top: 24px;
+      padding: 0;
+      list-style: none;
+      text-align: left;
+      color: $color-text-secondary;
+      font-size: 16px;
+      line-height: 1.8;
+
+      li {
+        position: relative;
+        padding-left: 20px;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: $color-primary;
+        }
+      }
+
+      strong {
+        color: $color-primary;
+        font-weight: 600;
+        cursor: pointer;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+

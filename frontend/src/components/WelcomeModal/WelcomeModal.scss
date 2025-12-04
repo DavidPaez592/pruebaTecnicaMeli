@@ -1,0 +1,91 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.welcome-modal {
+  position: fixed;
+  top: $header-height + $spacing-md;
+  right: $spacing-xl;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+
+  @include tablet {
+    right: $spacing-md;
+    left: $spacing-md;
+  }
+
+  &__tooltip {
+    position: relative;
+    background: $color-secondary;
+    color: white;
+    padding: $spacing-lg $spacing-xl;
+    border-radius: $border-radius-md;
+    max-width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    @include tablet {
+      max-width: 100%;
+    }
+  }
+
+  &__close {
+    @include button-reset;
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color $transition-fast;
+
+    &:hover {
+      color: white;
+    }
+
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__message {
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    opacity: 0.95;
+  }
+
+  &__arrow {
+    position: absolute;
+    top: -8px;
+    right: 40px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid $color-secondary;
+
+    @include tablet {
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

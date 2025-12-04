@@ -1,0 +1,83 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.breadcrumb {
+  background: $color-bg-primary;
+  padding-top: 30px; // 30px separación entre navbar y "Volver al listado"
+  padding-bottom: 10px; // 10px separación entre breadcrumb y contenido
+
+  &__container {
+    @include container;
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__back-link {
+    font-size: 15px; // 15px según especificaciones
+    font-weight: $font-weight-regular; // 400
+    color: $color-text-link; // #3483FA
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__separator {
+    color: $color-text-tertiary;
+    margin: 0 $spacing-xs;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__chevron {
+    color: rgba(0, 0, 0, 0.8);
+    margin: 0 $spacing-sm;
+    font-size: 18px;
+  }
+
+  &__text {
+    font-size: 18px; // 18px según especificaciones
+    font-weight: $font-weight-light; // 300
+    color: rgba(0, 0, 0, 0.8); // rgba(0,0,0,0.8)
+  }
+
+  &__publication {
+    display: flex;
+    gap: 4px;
+
+    @include tablet {
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  &__publication-label {
+    font-size: 15px;
+    font-weight: $font-weight-light; // 300
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  &__publication-id {
+    font-size: 15px;
+    font-weight: $font-weight-regular; // 400
+    color: rgba(0, 0, 0, 0.9); // Más oscuro/negro
+  }
+}
+
